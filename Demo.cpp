@@ -13,8 +13,6 @@
 #include "Contessa.hpp"
 #include "Game.hpp"
 
-#include <exception>
-
 using namespace coup;
 
 #include <iostream>
@@ -22,7 +20,8 @@ using namespace coup;
 #include <vector>
 using namespace std;
 
-int main() {
+int main()
+{
 
 	Game game_1{};
 
@@ -44,7 +43,8 @@ int main() {
 		Reut
 		Gilad
 	*/
-	for(string name : players){
+	for (string name : players)
+	{
 		cout << name << endl;
 	}
 
@@ -59,39 +59,26 @@ int main() {
 	contessa.income();
 
 	// throws exception, it is duke's turn now
-	try{
-		assassin.income();
-	}catch (const std::exception &e){
-		std::cerr << e.what() << '\n';
-	}
+	assassin.income();
+
 	duke.income();
 	assassin.foreign_aid();
 
 	// throws exception, the last operation duke performed
 	// is income, which cannot be blocked by any role
-	try{
-		captain.block(duke);
-	}catch (const std::exception &e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	captain.block(duke);
 
-	cout << duke.coins() << endl; // prints 2
+	cout << duke.coins() << endl;	  // prints 2
 	cout << assassin.coins() << endl; // prints 3
 
-	// throws exception, the last operation assassin performed
+	// throws exception, the last operation duke performed
 	// is foreign aid, which cannot be blocked by contessa
-	try{
-		contessa.block(assassin);
-	}catch (const std::exception &e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	contessa.block(assassin);
 
 	duke.block(assassin);
 	cout << assassin.coins() << endl; // prints 1
 
-	ambassador.transfer(duke, assassin); //transfers 1 coin from duke to assassin
+	ambassador.transfer(duke, assassin); // transfers 1 coin from duke to assassin
 	captain.foreign_aid();
 	contessa.foreign_aid();
 
@@ -134,4 +121,3 @@ int main() {
 		cout << name << endl;
 	}
 }
-
